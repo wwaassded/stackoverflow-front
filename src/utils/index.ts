@@ -16,7 +16,9 @@ function md5(raw: string) {
 }
 
 const lines_per_page = 4
+const github_third_authority_root = 'https://github.com/login/oauth/authorize?scope=user:email&client_id='
+const github_third_authority_client_id = 'Ov23lieK9SUhmawxB2jl'
 
-export {parseCookies, md5, lines_per_page}
+export {parseCookies, md5, lines_per_page, github_third_authority_root, github_third_authority_client_id}
 
 

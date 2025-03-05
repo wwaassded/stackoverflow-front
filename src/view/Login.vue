@@ -1,7 +1,7 @@
 <template>
   <div class="login_card">
-    <img src="../assets/login.svg" class="img" alt="my login svg">
-    <h1>Sign in to swinTransformer</h1>
+    <img src="../assets/stackoverflow-color-svgrepo-com.svg" class="img" alt="my login svg">
+    <h1>Sign in to stackOverflow</h1>
 
     <v-sheet class="mx-auto" width="300">
       <v-form fast-fail @submit.prevent="handleSubmit">
@@ -26,11 +26,22 @@
     </v-sheet>
 
     <v-footer class="footer">
-      <p>New to swinTransformer?
+      <p>New to stackOverflow?
         <router-link :to="{name: 'logup'}" replace>Create an account</router-link>
         .
       </p>
     </v-footer>
+    <v-btn
+        size="large"
+        color="white"
+        block
+        :href="github_third_authority"
+    >
+      <template v-slot:prepend>
+        <img src="../assets/github-142-svgrepo-com.svg" alt="Github Logo" class="btn-icon">
+      </template>
+      通过Github登陆
+    </v-btn>
   </div>
 </template>
 
@@ -38,10 +49,11 @@
 import {onMounted, onUnmounted, ref} from "vue"
 import {useRouter} from "vue-router"
 import axios from "axios"
-
-
+import {github_third_authority_root, github_third_authority_client_id} from "../utils";
 import useUtilStore from "../store/util.ts"
 import {md5} from "../utils";
+
+const github_third_authority = github_third_authority_root + github_third_authority_client_id;
 
 onMounted(() => {
   document.body.classList.add('login_body')
@@ -79,8 +91,8 @@ let passwordRules = [
 ];
 
 utilStore.$subscribe((_mutate, state) => {
-  if(state.id >= 0) {
-    localStorage.setItem('id',`${state.id}`)
+  if (state.id >= 0) {
+    localStorage.setItem('id', `${state.id}`)
     localStorage.setItem('username', state.username)
   }
 })
@@ -119,8 +131,15 @@ const handleSubmit = async () => {
   height: 100vh;
 }
 
+.btn-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
 .login_card {
   width: 400px;
+  height: 700px;
   padding: 40px;
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -129,8 +148,7 @@ const handleSubmit = async () => {
 }
 
 .img {
-  width: 60px;
-  margin-bottom: 20px;
+  width: 240px;
 }
 
 .login_card h1 {

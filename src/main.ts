@@ -35,7 +35,7 @@ const vuetify = createVuetify({
     },
 });
 
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'http://localhost:8888';
 axios.defaults.withCredentials = true;
 
 app
