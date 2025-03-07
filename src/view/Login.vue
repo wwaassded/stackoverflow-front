@@ -6,20 +6,10 @@
     <v-sheet class="mx-auto" width="300">
       <v-form fast-fail @submit.prevent="handleSubmit">
 
-        <v-text-field
-            label="User Name"
-            hint="请输入用户名"
-            v-model='userName'
-            :rules="nameRules"
-        ></v-text-field>
+        <v-text-field label="User Name" hint="请输入用户名" v-model='userName' :rules="nameRules"></v-text-field>
 
-        <v-text-field
-            label="Password"
-            type="password"
-            hint="请输入用户密码"
-            v-model="password"
-            :rules="passwordRules"
-        ></v-text-field>
+        <v-text-field label="Password" type="password" hint="请输入用户密码" v-model="password"
+          :rules="passwordRules"></v-text-field>
 
         <v-btn type="submit" size="large" block>登录</v-btn>
       </v-form>
@@ -27,16 +17,11 @@
 
     <v-footer class="footer">
       <p>New to stackOverflow?
-        <router-link :to="{name: 'logup'}" replace>Create an account</router-link>
+        <router-link :to="{ name: 'logup' }" replace>Create an account</router-link>
         .
       </p>
     </v-footer>
-    <v-btn
-        size="large"
-        color="white"
-        block
-        :href="github_third_authority"
-    >
+    <v-btn size="large" color="white" block :href="github_third_authority">
       <template v-slot:prepend>
         <img src="../assets/github-142-svgrepo-com.svg" alt="Github Logo" class="btn-icon">
       </template>
@@ -46,12 +31,12 @@
 </template>
 
 <script setup lang="ts" name="Login">
-import {onMounted, onUnmounted, ref} from "vue"
-import {useRouter} from "vue-router"
+import { onMounted, onUnmounted, ref } from "vue"
+import { useRouter } from "vue-router"
 import axios from "axios"
-import {github_third_authority_root, github_third_authority_client_id} from "../utils";
+import { github_third_authority_root, github_third_authority_client_id } from "../utils";
 import useUtilStore from "../store/util.ts"
-import {md5} from "../utils";
+import { md5 } from "../utils";
 
 const github_third_authority = github_third_authority_root + github_third_authority_client_id;
 
@@ -93,7 +78,7 @@ let passwordRules = [
 utilStore.$subscribe((_mutate, state) => {
   if (state.id >= 0) {
     localStorage.setItem('id', `${state.id}`)
-    localStorage.setItem('username', state.username)
+    localStorage.setItem('username', '')
   }
 })
 
@@ -106,7 +91,6 @@ const handleSubmit = async () => {
     if (response.status === 200) {
       // 登陆成功
       //TODO 如果用户通过cookie直接跳过了登录过程 应该想办法对store进行初始化
-      utilStore.getFromCookieIdentification()
       await router.replace({
         name: 'home',
       })
@@ -144,7 +128,8 @@ const handleSubmit = async () => {
   background-color: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   border-radius: 8px;
-  text-align: center; /* Center the content */
+  text-align: center;
+  /* Center the content */
 }
 
 .img {
